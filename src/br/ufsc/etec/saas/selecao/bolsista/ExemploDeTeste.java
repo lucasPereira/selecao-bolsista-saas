@@ -8,8 +8,13 @@ public class ExemploDeTeste {
 
 	@Test
 	public void testar() throws Exception {
-		int somaDeDoisMaisTres = 2 + 3;
-		assertEquals(5, somaDeDoisMaisTres);
+		Sistema s = new Sistema();
+		s.depositar(new Nota(10), 10);
+		s.depositar(new Nota(20), 10);
+		s.depositar(new Nota(50), 5);
+		s.depositar(new Nota(100), 4);
+		
+		System.out.println(s.sacar(880));
 	}
 
 }
