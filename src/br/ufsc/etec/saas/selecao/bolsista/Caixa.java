@@ -1,26 +1,41 @@
 package br.ufsc.etec.saas.selecao.bolsista;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Caixa {
 
-	private Integer quantidadeDeNotas;
-	private Integer quantidadeTotal;
+	private Map<Nota, Integer> notas;
 
 	public Caixa() {
-		quantidadeDeNotas = 0;
-		quantidadeTotal = 0;
+		notas = new HashMap<>();
 	}
 
 	public Integer obterQuantidadeDeNotas() {
-		return quantidadeDeNotas;
+		Integer quantidade = 0;
+		for (Map.Entry<Nota, Integer> quantidadePorNota : notas.entrySet()) {
+			Integer quantidadeDeNotas = quantidadePorNota.getValue();
+			quantidade += quantidadeDeNotas;
+		}
+		return quantidade;
 	}
 
 	public Integer calcularQuantidadeTotal() {
-		return quantidadeTotal;
+		Integer quantidade = 0;
+		for (Map.Entry<Nota, Integer> quantidadePorNota : notas.entrySet()) {
+			Integer quantidadeDeNotas = quantidadePorNota.getValue();
+			Integer valorDaNota = quantidadePorNota.getKey().obterValor();
+			quantidade += quantidadeDeNotas * valorDaNota;
+		}
+		return quantidade;
 	}
 
-	public void depositarNotaDez(int quantidadeDepositada) {
-		quantidadeDeNotas += quantidadeDepositada;
-		quantidadeTotal += quantidadeDepositada * 10;
+	public void depositar(Nota nota, Integer quantidade) {
+		if (notas.containsKey(nota)) {
+			notas.put(nota, notas.get(nota) + quantidade);
+		} else {
+			notas.put(nota, quantidade);
+		}
 	}
 
 }
