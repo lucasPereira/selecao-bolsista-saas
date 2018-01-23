@@ -1,10 +1,10 @@
 package br.ufsc.etec.saas.selecao.bolsista;
 
 public class Caixa {
-    
+
 	private Integer quantidadeDeNotas;
 	private Integer quantidadeTotal;
-	
+
 	public Caixa() {
 		// TODO Auto-generated constructor stub
 		quantidadeDeNotas = 0;
