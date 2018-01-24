@@ -46,8 +46,19 @@ public class Caixa {
 	}
 
 	public Boolean sacar(Integer valor) {
-
-		return true;
+		if (calcularQuantidadeTotal() < valor) {
+			return false;
+		}
+		for (Map.Entry<Nota, Integer> notaQuantidade : notas.entrySet()) {
+			Nota nota = notaQuantidade.getKey();
+			Integer valorDaNota = nota.obterValor();
+			if (valorDaNota.equals(valor)) {
+				Integer quantidadeNotas = notaQuantidade.getValue() - 1;
+				notas.put(nota, quantidadeNotas);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
