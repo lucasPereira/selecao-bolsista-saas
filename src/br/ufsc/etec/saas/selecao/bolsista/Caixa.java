@@ -53,9 +53,12 @@ public class Caixa {
 			Nota nota = notaQuantidade.getKey();
 			Integer valorDaNota = nota.obterValor();
 			if (valorDaNota.equals(valor)) {
-				Integer quantidadeNotas = notaQuantidade.getValue() - 1;
-				notas.put(nota, quantidadeNotas);
-				return true;
+				Integer quantidadeNotas = notaQuantidade.getValue();
+				if(quantidadeNotas > 0) {
+					quantidadeNotas --;
+					notas.put(nota, quantidadeNotas);
+					return true;
+				}
 			}
 		}
 		return false;
