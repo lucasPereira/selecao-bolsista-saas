@@ -22,7 +22,7 @@ public class TesteNota {
 	public void igualdade() throws Exception {
 		assertEquals(new Nota(10), new Nota(10));
 	}
-	
+
 	@Test
 	public void hash() throws Exception {
 		assertEquals(new Nota(10).hashCode(), new Integer(10).hashCode());

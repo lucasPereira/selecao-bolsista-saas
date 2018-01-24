@@ -45,4 +45,9 @@ public class Caixa {
 		return 0;
 	}
 
+	public Boolean sacar(Integer valor) {
+
+		return true;
+	}
+
 }
