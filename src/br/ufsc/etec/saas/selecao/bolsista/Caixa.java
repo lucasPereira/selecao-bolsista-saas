@@ -45,23 +45,25 @@ public class Caixa {
 		return 0;
 	}
 
-	public Boolean sacar(Integer valor) {
+	public Saque sacar(Integer valor) {
+		Saque saque = new Saque();
 		if (calcularQuantidadeTotal() < valor) {
-			return false;
+			return saque;
 		}
 		for (Map.Entry<Nota, Integer> notaQuantidade : notas.entrySet()) {
 			Nota nota = notaQuantidade.getKey();
 			Integer valorDaNota = nota.obterValor();
 			if (valorDaNota.equals(valor)) {
 				Integer quantidadeNotas = notaQuantidade.getValue();
-				if(quantidadeNotas > 0) {
-					quantidadeNotas --;
+				if (quantidadeNotas > 0) {
+					quantidadeNotas--;
 					notas.put(nota, quantidadeNotas);
-					return true;
+					saque.adicionar(nota, 1);
+					return saque;
 				}
 			}
 		}
-		return false;
+		return saque;
 	}
 
 }

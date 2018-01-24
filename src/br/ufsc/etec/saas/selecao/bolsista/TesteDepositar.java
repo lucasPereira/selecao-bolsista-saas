@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TesteDeposito {
+public class TesteDepositar {
 
 	private Caixa caixa;
 	private Nota dez;
