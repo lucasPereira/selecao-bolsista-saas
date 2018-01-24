@@ -26,6 +26,7 @@ public class TesteDeposito {
 		caixa.depositar(dez, 1);
 		assertEquals(1, caixa.obterQuantidadeDeNotas().intValue());
 		assertEquals(10, caixa.calcularQuantidadeTotal().intValue());
+		assertEquals(1, caixa.contarNotas(dez).intValue());
 	}
 
 	@Test
@@ -34,7 +35,7 @@ public class TesteDeposito {
 		caixa.depositar(dez, 2);
 		assertEquals(2, caixa.obterQuantidadeDeNotas().intValue());
 		assertEquals(20, caixa.calcularQuantidadeTotal().intValue());
-
+		assertEquals(2, caixa.contarNotas(dez).intValue());
 	}
 
 	@Test
@@ -44,14 +45,25 @@ public class TesteDeposito {
 		caixa.depositar(dez, 1);
 		assertEquals(2, caixa.obterQuantidadeDeNotas().intValue());
 		assertEquals(20, caixa.calcularQuantidadeTotal().intValue());
+		assertEquals(2, caixa.contarNotas(dez).intValue());
+	}
+	
+	@Test
+	public void doisDepositosDeDezComQuantiasDiferentes() throws Exception {
+		caixa.depositar(new Nota(10), 1);
+		caixa.depositar(new Nota(10), 2);
+		assertEquals(3, caixa.obterQuantidadeDeNotas().intValue());
+		assertEquals(30, caixa.calcularQuantidadeTotal().intValue());
+		assertEquals(3, caixa.contarNotas(new Nota(10)).intValue());
 	}
 
 	@Test
 	public void umDepositoDeVinte() throws Exception {
-		Nota notaDeVinte = new Nota(20);
-		caixa.depositar(notaDeVinte, 1);
+		Nota vinte = new Nota(20);
+		caixa.depositar(vinte, 1);
 		assertEquals(1, caixa.obterQuantidadeDeNotas().intValue());
 		assertEquals(20, caixa.calcularQuantidadeTotal().intValue());
+		assertEquals(1, caixa.contarNotas(vinte).intValue());
 	}
 
 }

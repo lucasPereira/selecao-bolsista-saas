@@ -38,4 +38,11 @@ public class Caixa {
 		}
 	}
 
+	public Integer contarNotas(Nota nota) {
+		if (notas.containsKey(nota)) {
+			return notas.get(nota);
+		}
+		return 0;
+	}
+
 }

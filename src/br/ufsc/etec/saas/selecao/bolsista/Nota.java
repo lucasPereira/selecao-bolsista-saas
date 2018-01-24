@@ -12,4 +12,23 @@ public class Nota {
 		return valor;
 	}
 
+	@Override
+	public boolean equals(Object objeto) {
+		if (objeto instanceof Nota) {
+			Nota outro = (Nota) objeto;
+			return valor.equals(outro.valor);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return valor.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return valor.toString();
+	}
+
 }
