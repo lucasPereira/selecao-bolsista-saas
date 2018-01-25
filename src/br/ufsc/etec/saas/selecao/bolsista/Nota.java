@@ -28,7 +28,7 @@ public class Nota {
 
 	@Override
 	public String toString() {
-		return valor.toString();
+		return "$" + valor.toString();
 	}
 
 }

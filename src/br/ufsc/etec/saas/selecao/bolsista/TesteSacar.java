@@ -2,6 +2,8 @@ package br.ufsc.etec.saas.selecao.bolsista;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,10 +22,11 @@ public class TesteSacar {
 	public void aprovar() throws Exception {
 		caixa.depositar(dez, 1);
 		Saque saque = caixa.sacar(10);
+		List<NotaQuantidade> notas = saque.obterNotasQuantidade();
+		NotaQuantidade umaDeDez = new NotaQuantidade(dez, 1);	
 		assertTrue(saque.aprovado());
-		assertEquals(1, saque.obterNotasQuantidade().size());
-		assertEquals(1, saque.obterNotasQuantidade().get(0).obterQuantidade().intValue());
-		assertEquals(new Nota(10), saque.obterNotasQuantidade().get(0).obterNota());
+		assertEquals(1, notas.size());
+		assertEquals(umaDeDez, notas.get(0));
 		assertEquals(0, caixa.calcularQuantidadeTotal().intValue());
 	}
 

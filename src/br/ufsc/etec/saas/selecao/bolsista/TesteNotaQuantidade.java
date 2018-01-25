@@ -12,5 +12,9 @@ public class TesteNotaQuantidade {
 		assertEquals(1, umaNotaDeDez.obterQuantidade().intValue());
 		assertEquals(new Nota(10), umaNotaDeDez.obterNota());
 	}
-
+	
+	@Test
+	public void igualdade() throws Exception {
+		assertEquals(new NotaQuantidade(new Nota(10), 1), new NotaQuantidade(new Nota(10), 1));
+	}
 }

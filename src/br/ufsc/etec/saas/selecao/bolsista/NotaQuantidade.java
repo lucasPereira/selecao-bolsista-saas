@@ -18,4 +18,19 @@ public class NotaQuantidade {
 		return nota;
 	}
 
+	@Override
+	public String toString() {
+		return quantidade + " de " + nota.toString();
+	}
+
+	@Override
+	public boolean equals(Object objeto) {
+		if (objeto instanceof NotaQuantidade) {
+			NotaQuantidade outro = (NotaQuantidade) objeto;
+			if(outro.quantidade.equals(quantidade) && outro.nota.equals(nota)) {
+				return true;
+			}
+		}
+		return super.equals(objeto);
+	}
 }
