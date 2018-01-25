@@ -1,7 +1,14 @@
 package br.ufsc.etec.saas.selecao.bolsista;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class Caixa {
 
@@ -50,20 +57,44 @@ public class Caixa {
 		if (calcularQuantidadeTotal() < valor) {
 			return saque;
 		}
-		for (Map.Entry<Nota, Integer> notaQuantidade : notas.entrySet()) {
-			Nota nota = notaQuantidade.getKey();
-			Integer valorDaNota = nota.obterValor();
-			if (valorDaNota.equals(valor)) {
-				Integer quantidadeNotas = notaQuantidade.getValue();
-				if (quantidadeNotas > 0) {
-					quantidadeNotas--;
-					notas.put(nota, quantidadeNotas);
-					saque.adicionar(nota, 1);
-					return saque;
+		List<NotaQuantidade> notasOrdenadas = obterNotasOrdenadas();
+		Integer valorRestante = valor;
+		for (NotaQuantidade notaQuantidade : notasOrdenadas) {
+			Nota notaAtual = notaQuantidade.obterNota();
+			Integer valorNotaAtual = notaAtual.obterValor();
+			Integer quantidadeNotaAtual = notaQuantidade.obterQuantidade();
+			if (valorNotaAtual <= valorRestante && quantidadeNotaAtual > 0) {
+				Integer quantidade = valorRestante / valorNotaAtual;
+				if (quantidade > quantidadeNotaAtual) {
+					quantidade = quantidadeNotaAtual;
 				}
+				saque.adicionar(notaAtual, quantidade);
+				valorRestante -= quantidade * valorNotaAtual;
 			}
 		}
-		return saque;
+		if (valorRestante == 0) {
+			for (NotaQuantidade notaQuantidade : saque.obterNotasQuantidade()) {
+				Nota notaAtual = notaQuantidade.obterNota();
+				Integer quantidade = notaQuantidade.obterQuantidade();
+				Integer quantidadeNotaAtual = notas.get(notaAtual);
+				notas.put(notaAtual, quantidadeNotaAtual - quantidade);
+			}
+			return saque;
+		}
+		return new Saque();
+	}
+
+	private List<NotaQuantidade> obterNotasOrdenadas() {
+		List<NotaQuantidade> notasOrdenadas = new LinkedList<>();
+		for (Map.Entry<Nota, Integer> parNotaQuantidade : notas.entrySet()) {
+			Nota nota = parNotaQuantidade.getKey();
+			Integer quantidade = parNotaQuantidade.getValue();
+			NotaQuantidade notaQuantidade = new NotaQuantidade(nota, quantidade);
+			notasOrdenadas.add(notaQuantidade);
+		}
+		Comparator<NotaQuantidade> comparador = new ComparadorPorNota();
+		Collections.sort(notasOrdenadas, comparador);
+		return notasOrdenadas;
 	}
 
 }

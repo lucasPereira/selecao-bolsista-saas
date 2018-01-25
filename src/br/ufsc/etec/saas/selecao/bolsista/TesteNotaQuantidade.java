@@ -8,11 +8,11 @@ public class TesteNotaQuantidade {
 
 	@Test
 	public void umaNotaDeDez() throws Exception {
-		NotaQuantidade umaNotaDeDez = new NotaQuantidade(new Nota(10),1);
+		NotaQuantidade umaNotaDeDez = new NotaQuantidade(new Nota(10), 1);
 		assertEquals(1, umaNotaDeDez.obterQuantidade().intValue());
 		assertEquals(new Nota(10), umaNotaDeDez.obterNota());
 	}
-	
+
 	@Test
 	public void igualdade() throws Exception {
 		assertEquals(new NotaQuantidade(new Nota(10), 1), new NotaQuantidade(new Nota(10), 1));

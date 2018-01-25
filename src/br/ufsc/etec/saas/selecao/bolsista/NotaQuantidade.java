@@ -27,7 +27,7 @@ public class NotaQuantidade {
 	public boolean equals(Object objeto) {
 		if (objeto instanceof NotaQuantidade) {
 			NotaQuantidade outro = (NotaQuantidade) objeto;
-			if(outro.quantidade.equals(quantidade) && outro.nota.equals(nota)) {
+			if (outro.quantidade.equals(quantidade) && outro.nota.equals(nota)) {
 				return true;
 			}
 		}
