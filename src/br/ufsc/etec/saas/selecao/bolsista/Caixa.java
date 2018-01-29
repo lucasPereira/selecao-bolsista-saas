@@ -1,21 +1,20 @@
 package br.ufsc.etec.saas.selecao.bolsista;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class Caixa {
 
 	private Map<Nota, Integer> notas;
+	private Comparator<NotaQuantidade> comparador;
 
 	public Caixa() {
 		notas = new HashMap<>();
+		comparador = new ComparadorMaiorNota();
 	}
 
 	public Integer obterQuantidadeDeNotas() {
@@ -92,9 +91,12 @@ public class Caixa {
 			NotaQuantidade notaQuantidade = new NotaQuantidade(nota, quantidade);
 			notasOrdenadas.add(notaQuantidade);
 		}
-		Comparator<NotaQuantidade> comparador = new ComparadorPorNota();
 		Collections.sort(notasOrdenadas, comparador);
 		return notasOrdenadas;
+	}
+
+	public void configurarSaque(Comparator<NotaQuantidade> comparadorAtual) {
+		comparador = comparadorAtual;
 	}
 
 }

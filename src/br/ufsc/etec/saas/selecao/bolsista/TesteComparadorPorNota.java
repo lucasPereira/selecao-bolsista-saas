@@ -18,7 +18,7 @@ public class TesteComparadorPorNota {
 		List<NotaQuantidade> listaOrdenada = new LinkedList<NotaQuantidade>();
 		listaOrdenada.add(duasDeDez);
 		listaOrdenada.add(umaDeVinte);
-		Comparator<NotaQuantidade> comparador = new ComparadorPorNota();
+		Comparator<NotaQuantidade> comparador = new ComparadorMaiorNota();
 		Collections.sort(listaOrdenada, comparador);
 		assertEquals(umaDeVinte, listaOrdenada.get(0));
 		assertEquals(duasDeDez, listaOrdenada.get(1));
